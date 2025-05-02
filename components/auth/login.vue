@@ -1,0 +1,37 @@
+<script setup lang="ts">
+import type { TabsItem } from "@nuxt/ui";
+
+defineProps<{ item: TabsItem }>();
+const login = reactive<LoginSchemaType>({
+  email: "",
+  password: "",
+});
+</script>
+<template>
+  <div>
+    <p class="text-muted mb-4">
+      {{ item.description }}
+    </p>
+
+    <UForm
+      :state="login"
+      :schema="loginSchema"
+      class="flex flex-col space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0"
+    >
+      <UFormField label="Email" name="email">
+        <UInput v-model="login.email" class="w-full" type="email" />
+      </UFormField>
+      <UFormField label="Password" name="password">
+        <UInput v-model="login.password" type="password" class="w-full" />
+      </UFormField>
+
+      <UButton
+        label="Sign In"
+        type="submit"
+        variant="soft"
+        class="flex justify-center text-center md:col-span-2"
+      />
+    </UForm>
+    <AuthSocial buttonLabel="Sign in with Github" />
+  </div>
+</template>
