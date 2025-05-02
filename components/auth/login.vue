@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import type { TabsItem } from "@nuxt/ui";
+import type { FormSubmitEvent, TabsItem } from "@nuxt/ui";
 
 defineProps<{ item: TabsItem }>();
 const login = reactive<LoginSchemaType>({
   email: "",
   password: "",
 });
+const onSubmit = async (event: FormSubmitEvent<LoginSchemaType>) => {
+  pr(event.data, "login-onSubmit");
+};
 </script>
 <template>
   <div>
@@ -15,6 +18,7 @@ const login = reactive<LoginSchemaType>({
 
     <UForm
       :state="login"
+      @submit.prevent="onSubmit"
       :schema="loginSchema"
       class="flex flex-col space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0"
     >

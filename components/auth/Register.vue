@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TabsItem } from "@nuxt/ui";
+import type { FormSubmitEvent, TabsItem } from "@nuxt/ui";
 
 const register = reactive<RegisterSchemaType>({
   name: "",
@@ -8,6 +8,9 @@ const register = reactive<RegisterSchemaType>({
   confirm: "",
 });
 defineProps<{ item: TabsItem }>();
+const onSubmit = async (event: FormSubmitEvent<RegisterSchemaType>) => {
+  pr(event.data, "register-onSubmit");
+};
 </script>
 <template>
   <div>
@@ -16,6 +19,7 @@ defineProps<{ item: TabsItem }>();
     </p>
 
     <UForm
+      @submit.prevent="onSubmit"
       :state="register"
       :schema="registerSchema"
       class="flex flex-col space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0"
