@@ -1,10 +1,9 @@
+<script setup lang="ts"></script>
 <template>
   <div>
-    <div>layout</div>
+    <div>
+      <SharedThemeSelector />
+    </div>
     <slot />
   </div>
 </template>
-
-<script setup lang="ts"></script>
-
-<style scoped></style>
