@@ -1,6 +1,6 @@
 <template>
   <div class="block text-xl text-red-500">home page</div>
-  <UiButton>Click Me</UiButton>
+  <UButton>Button</UButton>
 </template>
 
 <script setup lang="ts"></script>
