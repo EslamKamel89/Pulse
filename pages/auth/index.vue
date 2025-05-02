@@ -20,6 +20,8 @@ const items = [
 definePageMeta({
   layout: "auth",
 });
+const route = useRoute();
+const active = ref(route.query.tab ?? "0");
 </script>
 
 <template>
@@ -28,6 +30,7 @@ definePageMeta({
     variant="pill"
     class="h-full w-full gap-4 overflow-x-hidden !text-wrap"
     :ui="{ trigger: 'flex-1' }"
+    v-model="active"
   >
     <template #login="{ item }">
       <AuthLogin :item="item as TabsItem" />
