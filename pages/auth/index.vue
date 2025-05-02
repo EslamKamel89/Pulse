@@ -10,7 +10,7 @@ const items = [
     slot: "login",
   },
   {
-    label: "Get Started – Your Chat Awaits",
+    label: "Regsiter-Your Chat Awaits",
     description:
       "Sign up now to unlock seamless messaging, group chats, and more. No spam, just real talk.",
     icon: "i-lucide-message-circle-heart",
@@ -18,12 +18,18 @@ const items = [
   },
 ] satisfies TabsItem[];
 
-const state = reactive({
-  name: "Benjamin Canac",
-  username: "benjamincanac",
-  currentPassword: "",
-  newPassword: "",
+const register = reactive({
+  name: "",
+  email: "",
+  password: "",
   confirmPassword: "",
+});
+const login = reactive({
+  email: "",
+  password: "",
+});
+definePageMeta({
+  layout: "auth",
 });
 </script>
 
@@ -31,7 +37,7 @@ const state = reactive({
   <UTabs
     :items="items"
     variant="pill"
-    class="w-full gap-4"
+    class="h-full w-full gap-4 overflow-x-hidden !text-wrap"
     :ui="{ trigger: 'flex-1' }"
   >
     <template #login="{ item }">
@@ -39,21 +45,35 @@ const state = reactive({
         {{ (item as TabsItem).description }}
       </p>
 
-      <UForm :state="state" class="flex flex-col gap-4">
-        <UFormField label="Name" name="name">
-          <UInput v-model="state.name" class="w-full" />
+      <UForm
+        :state="login"
+        class="flex flex-col space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0"
+      >
+        <UFormField label="Email" name="email">
+          <UInput
+            v-model="register.email"
+            class="w-full"
+            type="email"
+            required
+          />
         </UFormField>
-        <UFormField label="Username" name="username">
-          <UInput v-model="state.username" class="w-full" />
+        <UFormField label="Password" name="password" required>
+          <UInput
+            v-model="register.password"
+            type="password"
+            required
+            class="w-full"
+          />
         </UFormField>
 
         <UButton
-          label="Save changes"
+          label="Sign In"
           type="submit"
           variant="soft"
-          class="self-end"
+          class="flex justify-center text-center md:col-span-2"
         />
       </UForm>
+      <AuthSocial buttonLabel="Sign in with Github" />
     </template>
 
     <template #register="{ item }">
@@ -61,18 +81,24 @@ const state = reactive({
         {{ (item as TabsItem).description }}
       </p>
 
-      <UForm :state="state" class="flex flex-col gap-4">
-        <UFormField label="Current Password" name="current" required>
+      <UForm
+        :state="register"
+        class="flex flex-col space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0"
+      >
+        <UFormField label="Name" name="name">
+          <UInput v-model="register.name" class="w-full" />
+        </UFormField>
+        <UFormField label="Email" name="email">
           <UInput
-            v-model="state.currentPassword"
-            type="password"
-            required
+            v-model="register.email"
             class="w-full"
+            type="email"
+            required
           />
         </UFormField>
-        <UFormField label="New Password" name="new" required>
+        <UFormField label="Password" name="password" required>
           <UInput
-            v-model="state.newPassword"
+            v-model="register.password"
             type="password"
             required
             class="w-full"
@@ -80,7 +106,7 @@ const state = reactive({
         </UFormField>
         <UFormField label="Confirm Password" name="confirm" required>
           <UInput
-            v-model="state.confirmPassword"
+            v-model="register.confirmPassword"
             type="password"
             required
             class="w-full"
@@ -88,12 +114,19 @@ const state = reactive({
         </UFormField>
 
         <UButton
-          label="Change password"
+          label="Create Account"
           type="submit"
           variant="soft"
-          class="self-end"
+          class="flex justify-center text-center md:col-span-2"
         />
       </UForm>
+      <AuthSocial buttonLabel="Register with Github" />
     </template>
   </UTabs>
 </template>
+
+<style>
+button {
+  cursor: pointer;
+}
+</style>
