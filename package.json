@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/icon": "^1.12.0",
     "@nuxt/ui": "^3.1.0",
     "@tailwindcss/vite": "^4.1.5",
     "@tanstack/vue-table": "^8.21.3",
@@ -21,6 +22,7 @@
     "embla-carousel-vue": "^8.6.0",
     "lucide-vue-next": "^0.506.0",
     "nuxt": "^3.17.1",
+    "nuxt-auth-utils": "^0.5.20",
     "reka-ui": "^2.2.0",
     "shadcn-nuxt": "^2.1.0",
     "tailwind-merge": "^3.2.0",

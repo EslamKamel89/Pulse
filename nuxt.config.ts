@@ -10,5 +10,12 @@ export default defineNuxtConfig({
   },
 
   css: ["~/assets/css/main.css"],
-  modules: ["shadcn-nuxt", "@nuxt/ui", "@vueuse/nuxt", "@vueuse/nuxt"],
+  modules: [
+    "shadcn-nuxt",
+    "@nuxt/ui",
+    "@vueuse/nuxt",
+    "@vueuse/nuxt",
+    "@nuxt/icon",
+    "nuxt-auth-utils",
+  ],
 });
