@@ -10,12 +10,12 @@ defineProps<{
       <div>OR</div>
       <UiSeparator />
     </div>
-    <div>
+    <a href="/api/auth/github">
       <UButton
         :label="buttonLabel"
         icon="i-lucide-github"
         class="flex w-full justify-center"
       />
-    </div>
+    </a>
   </div>
 </template>
