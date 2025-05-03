@@ -19,4 +19,15 @@ export default defineNuxtConfig({
     "nuxt-auth-utils",
     "@prisma/nuxt",
   ],
+  runtimeConfig: {
+    public: {},
+    githubClientId: process.env.GITHUB_CLIENT_ID,
+    githubClientSecret: process.env.GITHUB_CLIENT_SECRET,
+    oauth: {
+      github: {
+        clientId: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      },
+    },
+  },
 });
