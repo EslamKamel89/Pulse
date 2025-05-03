@@ -6,13 +6,23 @@ const login = reactive<LoginSchemaType>({
   email: "",
   password: "",
 });
+const { fetch: refreshSession } = useUserSession();
 const onSubmit = async (event: FormSubmitEvent<LoginSchemaType>) => {
-  const user = await $fetch("api/auth/login", {
-    method: "POST",
-    body: event.data,
-  });
-  if (user) {
-  } else {
+  try {
+    const user = await $fetch("api/auth/login", {
+      method: "POST",
+      body: event.data,
+    });
+    if (user) {
+      pr(user, "User signedIn successfully");
+      await refreshSession();
+      await navigateTo("/user");
+    } else {
+      pr(user, "User signedIn failed");
+    }
+  } catch (error) {
+    pr(error, "Error - User signedIn failed");
+  } finally {
   }
 };
 </script>

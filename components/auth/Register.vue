@@ -8,20 +8,29 @@ const register = reactive<RegisterSchemaType>({
   confirm: "",
 });
 defineProps<{ item: TabsItem }>();
+const { fetch: refreshSession } = useUserSession();
 const onSubmit = async (event: FormSubmitEvent<RegisterSchemaType>) => {
-  const user = await $fetch("/api/auth/register", {
-    method: "POST",
-    body: {
-      name: register.name,
-      email: register.email,
-      password: register.password,
-      confirm: register.confirm,
-    },
-  });
-  if (user) {
-    pr(user, "User registered successfully");
-  } else {
-    pr(user, "User registeration failed");
+  try {
+    const user = await $fetch("/api/auth/register", {
+      method: "POST",
+      body: {
+        name: register.name,
+        email: register.email,
+        password: register.password,
+        confirm: register.confirm,
+      },
+    });
+    if (user) {
+      pr(user, "User registered successfully");
+      await refreshSession();
+
+      await navigateTo("/user");
+    } else {
+      pr(user, "User registeration failed");
+    }
+  } catch (error) {
+    pr(error, "Error - User registeration failed");
+  } finally {
   }
 };
 </script>

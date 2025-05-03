@@ -25,6 +25,7 @@ export default defineEventHandler(async (event) => {
       statusMessage: "User not created",
     });
   }
-  await setUserSession(event, user);
+  await clearUserSession(event);
+  await setUserSession(event, { user: userApiResource(user) });
   return userApiResource(user);
 });
