@@ -7,7 +7,13 @@ const login = reactive<LoginSchemaType>({
   password: "",
 });
 const onSubmit = async (event: FormSubmitEvent<LoginSchemaType>) => {
-  pr(event.data, "login-onSubmit");
+  const user = await $fetch("api/auth/login", {
+    method: "POST",
+    body: event.data,
+  });
+  if (user) {
+  } else {
+  }
 };
 </script>
 <template>
