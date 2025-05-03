@@ -4,5 +4,7 @@
 
 <script setup lang="ts">
 const session = useUserSession();
-pr(session, "session data");
+definePageMeta({
+  middleware: ["auth"],
+});
 </script>
