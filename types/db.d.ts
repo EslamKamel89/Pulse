@@ -3,7 +3,7 @@ import {
   OauthAccount as OauthAccountType,
   User as UserType,
 } from "@prisma/client";
-export type User = UserType & {
+export type User = Omit<UserType, "hashedPassword"> & {
   oauthAccounts?: OauthAccount[];
   conversations?: Conversation[];
   messages?: Message[];

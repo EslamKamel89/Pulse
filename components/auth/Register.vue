@@ -9,7 +9,20 @@ const register = reactive<RegisterSchemaType>({
 });
 defineProps<{ item: TabsItem }>();
 const onSubmit = async (event: FormSubmitEvent<RegisterSchemaType>) => {
-  pr(event.data, "register-onSubmit");
+  const user = await $fetch("/api/auth/register", {
+    method: "POST",
+    body: {
+      name: register.name,
+      email: register.email,
+      password: register.password,
+      confirm: register.confirm,
+    },
+  });
+  if (user) {
+    pr(user, "User registered successfully");
+  } else {
+    pr(user, "User registeration failed");
+  }
 };
 </script>
 <template>

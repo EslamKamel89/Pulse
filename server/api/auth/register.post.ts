@@ -15,9 +15,9 @@ export default defineEventHandler(async (event) => {
       statusMessage: "User already exists with this email",
     });
   }
-  body.password = await hashPassword(body.password);
+  const password = await hashPassword(body.password);
   const user = await db.user.create({
-    data: body,
+    data: { email: body.email, name: body.name, hashedPassword: password },
   });
   if (!user) {
     throw createError({
