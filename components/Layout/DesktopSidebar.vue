@@ -3,7 +3,6 @@ import type { NavRoute } from "~/types";
 
 const { routes } = useRoutes();
 const handleClick = (route: NavRoute) => {
-  pr("hello world");
   if (route.onClick) {
     route.onClick();
   } else {
