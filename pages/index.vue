@@ -1,5 +1,8 @@
 <script setup lang="ts">
 //?c this  page will be for guest users only
+definePageMeta({
+  layout: "guest",
+});
 const { user } = useUserSession();
 watch(
   user,
