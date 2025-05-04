@@ -10,6 +10,7 @@ const { fetch: refreshSession } = useUserSession();
 const store = useStore();
 const onSubmit = async (event: FormSubmitEvent<LoginSchemaType>) => {
   try {
+    store.setLoading(true);
     const user = await $fetch("api/auth/login", {
       method: "POST",
       body: event.data,
@@ -25,10 +26,20 @@ const onSubmit = async (event: FormSubmitEvent<LoginSchemaType>) => {
       await navigateTo("/user");
     } else {
       pr(user, "User signedIn failed");
+      store.setAppError({
+        message: "Login ",
+        statusMessage: "Login failed",
+      });
     }
   } catch (error) {
     pr(error, "Error - User signedIn failed");
+    store.setAppError({
+      message: "Login ",
+      statusMessage: "Login failed",
+    });
   } finally {
+    store.setLoading(false);
+    store.setAppError(null);
   }
 };
 </script>

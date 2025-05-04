@@ -12,6 +12,7 @@ const { fetch: refreshSession } = useUserSession();
 const store = useStore();
 const onSubmit = async (event: FormSubmitEvent<RegisterSchemaType>) => {
   try {
+    store.setLoading(true);
     const user = await $fetch("/api/auth/register", {
       method: "POST",
       body: {
@@ -32,10 +33,20 @@ const onSubmit = async (event: FormSubmitEvent<RegisterSchemaType>) => {
       await navigateTo("/user");
     } else {
       pr(user, "User registeration failed");
+      store.setAppError({
+        message: "Register ",
+        statusMessage: "Register failed",
+      });
     }
   } catch (error) {
     pr(error, "Error - User registeration failed");
+    store.setAppError({
+      message: "Register ",
+      statusMessage: "Register failed",
+    });
   } finally {
+    store.setLoading(false);
+    store.setAppError(null);
   }
 };
 </script>
