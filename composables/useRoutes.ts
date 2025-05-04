@@ -1,3 +1,5 @@
+import type { NavRoute } from "~/types";
+
 export const useRoutes = () => {
   const { clear, fetch } = useUserSession();
   const { params } = useRoute();
@@ -8,31 +10,39 @@ export const useRoutes = () => {
     await fetch();
     await navigateTo("/");
   };
-  const routes = computed(() => {
+  const routes = computed<NavRoute[]>(() => {
     return [
       {
         label: "Chat",
         href: "/conversations",
         icon: "heroicons:chat-bubble-oval-left-ellipsis-solid",
         active: params.name === "conversations",
+        onClick: null,
       },
       {
         label: "Users",
         href: "/users",
         icon: "heroicons:users-20-solid",
         active: params.name === "users",
+        onClick: null,
       },
       {
         label: "Logout",
-        onClick: async () => await logout(),
+        onClick: () => {
+          logout();
+        },
         href: "#",
         icon: "heroicons:arrow-left-on-rectangle",
+        active: false,
       },
       {
         label: "Toggle Theme",
-        onClick: () => (isDark.value = !isDark.value),
+        onClick: () => {
+          isDark.value = !isDark.value;
+        },
         href: "#",
         icon: icon.value,
+        active: false,
       },
     ];
   });
