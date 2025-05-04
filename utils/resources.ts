@@ -10,3 +10,6 @@ export const userApiResource = (user: User) => {
     updatedAt: user.updatedAt,
   };
 };
+export const userApiCollectionResource = (users: User[]) => {
+  return users.map((user) => userApiResource(user));
+};
