@@ -33,10 +33,7 @@ const onSubmit = async (event: FormSubmitEvent<LoginSchemaType>) => {
     }
   } catch (error) {
     pr(error, "Error - User signedIn failed");
-    store.setAppError({
-      message: "Login ",
-      statusMessage: "Login failed",
-    });
+    store.setAppError(handleApiError(error));
   } finally {
     store.setLoading(false);
     store.setAppError(null);

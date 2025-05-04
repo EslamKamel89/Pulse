@@ -10,6 +10,13 @@ const initialState: State = {
 const state = ref<State>(initialState);
 export const useStore = () => {
   const setAppError = (error: ApiError | null) => {
+    if (error) {
+      showToast({
+        message: error.message ?? "",
+        description: error.statusMessage ?? "",
+        type: "error",
+      });
+    }
     state.value.apiError = error;
   };
   const setLoading = (loading: boolean) => {

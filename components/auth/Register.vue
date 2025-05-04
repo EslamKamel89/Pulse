@@ -40,10 +40,7 @@ const onSubmit = async (event: FormSubmitEvent<RegisterSchemaType>) => {
     }
   } catch (error) {
     pr(error, "Error - User registeration failed");
-    store.setAppError({
-      message: "Register ",
-      statusMessage: "Register failed",
-    });
+    store.setAppError(handleApiError(error));
   } finally {
     store.setLoading(false);
     store.setAppError(null);
