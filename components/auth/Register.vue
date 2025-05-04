@@ -8,10 +8,12 @@ const register = reactive<RegisterSchemaType>({
   confirm: "",
 });
 defineProps<{ item: TabsItem }>();
-const { fetch: refreshSession } = useUserSession();
+const { fetch: refreshSession, clear } = useUserSession();
 const store = useStore();
+const { isLoading } = toRefs(store.state.value);
 const onSubmit = async (event: FormSubmitEvent<RegisterSchemaType>) => {
   try {
+    await clear();
     store.setLoading(true);
     const user = await $fetch("/api/auth/register", {
       method: "POST",
@@ -76,6 +78,7 @@ const onSubmit = async (event: FormSubmitEvent<RegisterSchemaType>) => {
         label="Create Account"
         type="submit"
         variant="soft"
+        :disabled="isLoading"
         class="flex justify-center text-center md:col-span-2"
       />
     </UForm>

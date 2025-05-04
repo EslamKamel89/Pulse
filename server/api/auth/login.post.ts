@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     where: { email: body.email },
     include: { oauthAccounts: true },
   });
-  if (!user?.hashedPassword && !user?.oauthAccounts.length) {
+  if (user && !user?.hashedPassword) {
     throw createError({
       statusCode: 401,
       statusMessage:

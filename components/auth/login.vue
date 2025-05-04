@@ -6,10 +6,12 @@ const login = reactive<LoginSchemaType>({
   email: "",
   password: "",
 });
-const { fetch: refreshSession } = useUserSession();
+const { fetch: refreshSession, clear } = useUserSession();
 const store = useStore();
+const { isLoading } = toRefs(store.state.value);
 const onSubmit = async (event: FormSubmitEvent<LoginSchemaType>) => {
   try {
+    await clear();
     store.setLoading(true);
     const user = await $fetch("api/auth/login", {
       method: "POST",
@@ -63,6 +65,7 @@ const onSubmit = async (event: FormSubmitEvent<LoginSchemaType>) => {
         label="Sign In"
         type="submit"
         variant="soft"
+        :disabled="isLoading"
         class="flex justify-center text-center md:col-span-2"
       />
     </UForm>
