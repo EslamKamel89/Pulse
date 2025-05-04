@@ -1,3 +1,4 @@
+<script setup lang="ts"></script>
 <template>
   <div>
     <div
@@ -5,18 +6,16 @@
     >
       <nav class="mt-4 flex flex-col justify-between">
         <ul class="flex flex-col items-center space-y-1">
-          <!--
-                  <UTooltip v-for="item in routes" :key="item.label" :text="item.label"
-                  :popper="{ placement: 'right' }">
-                  <li @click="handleClick(item)">
-                    <div class="group flex gap-x-3 rounded-full p-3 text-sm leading-6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-primary dark:text-white dark:hover:bg-gray-700 dark:hover:text-primary"
-                    :class="{ 'bg-gray-100 text-primary dark:bg-gray-700 dark:text-white': item.active }">
-                    <Icon :name="item.icon" class="h-5 w-5 shrink-0"></Icon>
-                    <span class="sr-only">{{ item.label }}</span>
-                  </div>
-                </li>
-              </UTooltip>
-            -->
+          <UTooltip
+            :content="{
+              align: 'center',
+              side: 'bottom',
+              sideOffset: 8,
+            }"
+            text="Open on GitHub"
+          >
+            <UButton label="Open" color="neutral" variant="subtle" />
+          </UTooltip>
         </ul>
       </nav>
       <!-- 
@@ -33,7 +32,3 @@
   <!--
   <SettingsModal :is-open="isOpen" @close-modal="isOpen = false"></SettingsModal>
 --></template>
-
-<script setup lang="ts"></script>
-
-<style scoped></style>

@@ -9,9 +9,12 @@ export default function useTheme() {
       colorMode.preference = _isDark ? "dark" : "light";
     },
   });
-
+  const icon = computed(() => {
+    return isDark.value ? "i-lucide-moon" : "i-lucide-sun";
+  });
   return {
     colorMode,
     isDark,
+    icon,
   };
 }

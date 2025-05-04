@@ -1,5 +1,43 @@
 export const useRoutes = () => {
   const { clear, fetch } = useUserSession();
   const { params } = useRoute();
-  const { isDark, colorMode } = useTheme();
+  const { isDark, colorMode, icon } = useTheme();
+
+  const logout = async () => {
+    await clear();
+    await fetch();
+    await navigateTo("/");
+  };
+  const routes = computed(() => {
+    return [
+      {
+        label: "Chat",
+        href: "/conversations",
+        icon: "heroicons:chat-bubble-oval-left-ellipsis-solid",
+        active: params.name === "conversations",
+      },
+      {
+        label: "Users",
+        href: "/users",
+        icon: "heroicons:users-20-solid",
+        active: params.name === "users",
+      },
+      {
+        label: "Logout",
+        onClick: async () => await logout(),
+        href: "#",
+        icon: "heroicons:arrow-left-on-rectangle",
+      },
+      {
+        label: "Toggle Theme",
+        onClick: () => (isDark.value = !isDark.value),
+        href: "#",
+        icon: icon.value,
+      },
+    ];
+  });
+  return {
+    routes,
+    logout,
+  };
 };
