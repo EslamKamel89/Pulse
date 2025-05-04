@@ -12,3 +12,5 @@ export type NavRoute = {
   active: boolean;
   onClick: (() => void) | null;
 };
+
+export type UseFetchKey = "users";

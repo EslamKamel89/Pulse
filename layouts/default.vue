@@ -8,8 +8,8 @@ const handleLogout = async () => {
 <template>
   <div class="flex !min-h-screen flex-col">
     <div class="flex h-full flex-1 flex-row">
-      <LayoutSidebar />
-      <!--userslist-->
+      <LayoutNavigation />
+      <LayoutUsersList />
       <slot />
     </div>
     <LayoutFooter />

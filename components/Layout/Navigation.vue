@@ -2,7 +2,7 @@
 <template>
   <div class="flex flex-col">
     <div class="flex-1">
-      <LayoutDesktopSidebar />
+      <LayoutDesktopNavigation />
       <LayoutMobileNavigation />
     </div>
   </div>

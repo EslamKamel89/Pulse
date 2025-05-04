@@ -12,7 +12,7 @@ const handleClick = (route: NavRoute) => {
 </script>
 <template>
   <div
-    class="fixed bottom-0 z-40 flex w-full items-center justify-between border-t-[1px] bg-white lg:hidden dark:border-gray-700 dark:bg-gray-900"
+    class="fixed bottom-0 z-40 flex h-16 w-full items-center justify-between border-t-[1px] bg-white lg:hidden dark:border-gray-700 dark:bg-gray-900"
   >
     <UTooltip
       v-for="item in routes"
