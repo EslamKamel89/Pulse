@@ -7,6 +7,7 @@ const login = reactive<LoginSchemaType>({
   password: "",
 });
 const { fetch: refreshSession } = useUserSession();
+const store = useStore();
 const onSubmit = async (event: FormSubmitEvent<LoginSchemaType>) => {
   try {
     const user = await $fetch("api/auth/login", {
@@ -16,6 +17,11 @@ const onSubmit = async (event: FormSubmitEvent<LoginSchemaType>) => {
     if (user) {
       pr(user, "User signedIn successfully");
       await refreshSession();
+      store.showToast({
+        message: "Login",
+        description: "Login successfully",
+        type: "success",
+      });
       await navigateTo("/user");
     } else {
       pr(user, "User signedIn failed");

@@ -9,6 +9,7 @@ const register = reactive<RegisterSchemaType>({
 });
 defineProps<{ item: TabsItem }>();
 const { fetch: refreshSession } = useUserSession();
+const store = useStore();
 const onSubmit = async (event: FormSubmitEvent<RegisterSchemaType>) => {
   try {
     const user = await $fetch("/api/auth/register", {
@@ -23,7 +24,11 @@ const onSubmit = async (event: FormSubmitEvent<RegisterSchemaType>) => {
     if (user) {
       pr(user, "User registered successfully");
       await refreshSession();
-
+      store.showToast({
+        message: "Login",
+        description: "Login successfully",
+        type: "success",
+      });
       await navigateTo("/user");
     } else {
       pr(user, "User registeration failed");
