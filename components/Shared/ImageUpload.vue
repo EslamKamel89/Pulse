@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Trash } from "lucide-vue-next";
-
+defineProps<{
+  title: string;
+}>();
 const selectedFile = ref<File | null>(null);
 const isDragging = ref(false);
 const emit = defineEmits<{
@@ -51,12 +53,12 @@ const onDragEnter = () => {
 
 <template>
   <div class="my-4">
-    <h3 class="font-bold">Attached New Images</h3>
+    <h3 class="mb-3 font-bold">{{ title }}</h3>
     <div class="flex w-full flex-col space-y-4">
       <div class="flex w-full items-center justify-center">
         <label
           for="dropzone-file-single"
-          class="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100"
+          class="flex h-28 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100"
           @dragenter.prevent="onDragEnter"
           @dragstart.prevent="onDragEnter"
           @dragover.prevent="onDragEnter"

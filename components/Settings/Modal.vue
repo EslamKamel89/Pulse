@@ -12,6 +12,8 @@
   >
     <slot />
 
-    <template #body> <SharedImageUpload /> </template>
+    <template #body>
+      <SharedImageUpload title="Upload Your Avatar" />
+    </template>
   </UModal>
 </template>
