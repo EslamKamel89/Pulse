@@ -9,9 +9,7 @@ const isActive = computed(() => {
 });
 </script>
 <template>
-  <div
-    class="flex h-full w-full flex-1 items-center justify-center self-stretch"
-  >
+  <div class="flex items-center justify-center">
     <UTooltip :text="user?.name">
       <UChip inset :color="isActive">
         <UAvatar :src="user?.avatarUrl ?? ''" :alt="user?.name ?? ''" />

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NavRoute } from "~/types";
+import type { User } from "~/types/db";
 
 const { routes } = useRoutes();
 const handleClick = (route: NavRoute) => {
@@ -9,16 +10,18 @@ const handleClick = (route: NavRoute) => {
     navigateTo(route.href);
   }
 };
+const session = useUserSession();
 </script>
 <template>
   <div
-    class="fixed bottom-0 z-40 flex h-16 w-full items-center justify-between border-t-[1px] bg-white lg:hidden dark:border-gray-700 dark:bg-gray-900"
+    class="fixed bottom-0 z-40 flex h-16 w-full items-center justify-center border-t-[1px] bg-white px-4 lg:hidden dark:border-gray-700 dark:bg-gray-900"
   >
     <UTooltip
       v-for="item in routes"
       :key="item.label"
       :text="item.label"
       :popper="{ placement: 'top' }"
+      class="flex flex-1 items-center"
     >
       <div @click="handleClick(item)">
         <div
@@ -33,5 +36,9 @@ const handleClick = (route: NavRoute) => {
         </div>
       </div>
     </UTooltip>
+    <SharedAvatar
+      v-if="session.user.value"
+      :user="session.user.value as User"
+    ></SharedAvatar>
   </div>
 </template>

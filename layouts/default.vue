@@ -6,11 +6,13 @@ const handleLogout = async () => {
 };
 </script>
 <template>
-  <div class="flex !min-h-screen flex-col">
-    <div class="flex h-full flex-1 flex-row">
+  <div class="flex h-screen w-screen flex-col">
+    <div class="flex h-screen w-screen flex-1 flex-row overflow-hidden">
       <LayoutActionsNavigation />
       <LayoutUsersNavigation />
-      <slot />
+      <div class="flex-1">
+        <slot />
+      </div>
     </div>
     <LayoutFooter />
   </div>

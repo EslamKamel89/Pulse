@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NavRoute } from "~/types";
+import type { User } from "~/types/db";
 
 const { routes } = useRoutes();
 const handleClick = (route: NavRoute) => {
@@ -9,13 +10,14 @@ const handleClick = (route: NavRoute) => {
     navigateTo(route.href);
   }
 };
+const session = useUserSession();
 </script>
 <template>
   <div class="flex h-full flex-col">
     <div
       class="hidden flex-1 justify-between lg:flex lg:w-20 lg:flex-col lg:overflow-y-auto lg:border-r-[1px] lg:bg-white lg:pb-4 xl:px-6 dark:border-gray-700 dark:bg-gray-900"
     >
-      <nav class="mt-4 flex flex-col justify-between">
+      <nav class="mt-4 flex flex-1 flex-col justify-between">
         <ul class="flex flex-col items-center space-y-1">
           <UTooltip
             v-for="route in routes"
@@ -41,15 +43,7 @@ const handleClick = (route: NavRoute) => {
           </UTooltip>
         </ul>
       </nav>
-      <!-- 
-            
-            <div class=" mt-4 flex space-y-2 justify-between items-center">
-              <div @click="isOpen = true" class="cursor-pointer hover:opacity-75 transition">
-                <Avatar :user="user"></Avatar>
-              </div>
-              
-            </div>
-          -->
+      <SharedAvatar :user="session.user.value as User" />
     </div>
   </div>
   <!--
