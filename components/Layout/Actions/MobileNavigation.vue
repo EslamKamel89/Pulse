@@ -11,6 +11,9 @@ const handleClick = (route: NavRoute) => {
   }
 };
 const session = useUserSession();
+const user = computed(() => {
+  return session.user.value as User;
+});
 </script>
 <template>
   <div
@@ -36,9 +39,8 @@ const session = useUserSession();
         </div>
       </div>
     </UTooltip>
-    <SharedAvatar
-      v-if="session.user.value"
-      :user="session.user.value as User"
-    ></SharedAvatar>
+    <SettingsModal>
+      <SharedAvatar v-if="session.user.value" :user="user"></SharedAvatar>
+    </SettingsModal>
   </div>
 </template>
