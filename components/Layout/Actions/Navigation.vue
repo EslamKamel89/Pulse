@@ -2,8 +2,8 @@
 <template>
   <div class="flex flex-col">
     <div class="flex-1">
-      <LayoutDesktopNavigation />
-      <LayoutMobileNavigation />
+      <LayoutActionsDesktopNavigation />
+      <LayoutActionsMobileNavigation />
     </div>
   </div>
 </template>
