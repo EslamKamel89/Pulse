@@ -2,7 +2,11 @@
 <template>
   <div>
     <div class="space-y-4">
-      <div class="flex items-center gap-4" v-for="i in 5" :key="i">
+      <div
+        class="flex items-center gap-4 rounded-lg px-1 py-2 shadow-lg"
+        v-for="i in 5"
+        :key="i"
+      >
         <USkeleton class="h-8 w-8 rounded-full" />
 
         <div class="grid gap-2">
