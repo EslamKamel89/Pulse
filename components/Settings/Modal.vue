@@ -12,6 +12,6 @@
   >
     <slot />
 
-    <template #body> </template>
+    <template #body> <SharedImagesUpload /> </template>
   </UModal>
 </template>
