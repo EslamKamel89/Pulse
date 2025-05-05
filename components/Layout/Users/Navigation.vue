@@ -17,9 +17,9 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="flex min-h-full flex-1 flex-col self-stretch">
+  <div class="b flex min-h-full w-min flex-col self-stretch">
     <UDrawer direction="left">
-      <div class="block lg:hidden">
+      <div class="block w-fit lg:hidden">
         <UButton
           color="neutral"
           variant="subtle"
