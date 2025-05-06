@@ -1,11 +1,15 @@
 <script setup lang="ts">
-const uploadedAvatar = ref<File>();
 const uploadedAvatarURL = ref<string | null>();
+const open = ref(false);
 const { setLoading, setAppError } = useStore();
 const handleFileSelected = async (file: File | null) => {
   pr(file, "modal.vue - file selected");
   const fd = new FormData();
-  if (file) fd.append("image", file);
+  if (!file) {
+    uploadedAvatarURL.value = null;
+    return;
+  }
+  fd.append("image", file);
   try {
     setLoading(true);
     const { url } = await $fetch<{ url: string | null }>(
@@ -25,9 +29,13 @@ const handleFileSelected = async (file: File | null) => {
     setLoading(false);
   }
 };
+const closeModal = () => {
+  open.value = false;
+};
 </script>
 <template>
   <UModal
+    v-model:open="open"
     title="User Profile"
     description="Manage your account, privacy, notifications, and other preferences to customize your experience in the app."
     :close="{
@@ -44,6 +52,10 @@ const handleFileSelected = async (file: File | null) => {
         title="Upload Your Avatar"
         @file-selected="(file) => handleFileSelected(file)"
       />
+      <div class="flex space-x-2">
+        <UButton @click="closeModal" color="error">Cancel</UButton>
+        <UButton @click="closeModal" color="primary">Save</UButton>
+      </div>
     </template>
   </UModal>
 </template>
