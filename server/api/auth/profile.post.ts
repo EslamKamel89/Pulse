@@ -14,5 +14,8 @@ export default defineEventHandler(async (event) => {
     where: { id: session.user.id },
     data: { avatarUrl: image },
   });
+  await clearUserSession(event);
+  await setUserSession(event, { user: userApiResource(user) });
+
   return userApiResource(user);
 });

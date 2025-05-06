@@ -22,5 +22,7 @@ export const fileUpload = async (
     pr(error, "Error fileUpload");
     setAppError(handleApiError(error));
     return null;
+  } finally {
+    setAppError(null);
   }
 };
