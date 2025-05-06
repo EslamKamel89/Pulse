@@ -4,34 +4,14 @@ const open = ref(false);
 const { setLoading, setAppError } = useStore();
 const handleFileSelected = async (file: File | null) => {
   pr(file, "modal.vue - file selected");
-  const fd = new FormData();
-  if (!file) {
-    uploadedAvatarURL.value = null;
-    return;
-  }
-  fd.append("file", file);
-  try {
-    setLoading(true);
-    const { url } = await $fetch<{ url: string | null }>(
-      "/api/upload/useravatar/file",
-      {
-        method: "POST",
-        body: fd,
-      },
-    );
-    uploadedAvatarURL.value = url;
-    pr(url, "uploadedAvatarUrl");
-  } catch (error) {
-    pr(error, "Error uplaoding user avatar");
-    uploadedAvatarURL.value = null;
-    setAppError(handleApiError(error));
-  } finally {
-    setLoading(false);
-  }
+  setLoading(true);
+  uploadedAvatarURL.value = await fileUpload(file, "useravatar");
+  setLoading(false);
 };
 const closeModal = () => {
   open.value = false;
 };
+// const handleSubmit
 </script>
 <template>
   <UModal

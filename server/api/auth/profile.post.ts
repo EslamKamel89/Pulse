@@ -1,3 +1,18 @@
+import db from "~/utils/db";
+import { userApiResource } from "~/utils/resources";
+
 export default defineEventHandler(async (event) => {
-  await requireUserSession(event);
+  const session = await requireUserSession(event);
+  const { image } = await readBody<{ image?: string }>(event);
+  if (!image) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: "Image is required",
+    });
+  }
+  const user = await db.user.update({
+    where: { id: session.user.id },
+    data: { avatarUrl: image },
+  });
+  return userApiResource(user);
 });
