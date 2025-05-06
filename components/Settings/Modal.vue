@@ -9,11 +9,11 @@ const handleFileSelected = async (file: File | null) => {
     uploadedAvatarURL.value = null;
     return;
   }
-  fd.append("image", file);
+  fd.append("file", file);
   try {
     setLoading(true);
     const { url } = await $fetch<{ url: string | null }>(
-      "/api/auth/useravatar",
+      "/api/upload/useravatar/file",
       {
         method: "POST",
         body: fd,
