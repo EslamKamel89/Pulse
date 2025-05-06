@@ -6,14 +6,14 @@ defineProps<{
 const selectedFile = ref<File | null>(null);
 const isDragging = ref(false);
 const emit = defineEmits<{
-  onChange: [file: File | null];
+  fileSelected: [file: File | null];
 }>();
 const handleFileChange = (event: Event) => {
   const newFiles = (event.target as HTMLInputElement).files;
   if (newFiles) {
     const files = Array.from(newFiles);
     selectedFile.value = files.length ? files[0] : null;
-    emit("onChange", selectedFile.value);
+    emit("fileSelected", selectedFile.value);
   }
 };
 const handleFileRemove = () => {
@@ -33,7 +33,7 @@ const updateFileInput = () => {
     fileInput.files = null;
   }
 
-  emit("onChange", selectedFile.value);
+  emit("fileSelected", selectedFile.value);
 };
 const getPreviewUrl = (file: File) => URL.createObjectURL(file);
 const onDrop = (event: Event) => {
@@ -42,6 +42,7 @@ const onDrop = (event: Event) => {
     ?.files;
   if (!files || !files.length) return;
   selectedFile.value = files[0];
+  emit("fileSelected", selectedFile.value);
 };
 const onDragLeave = (event: Event) => {
   isDragging.value = false;
