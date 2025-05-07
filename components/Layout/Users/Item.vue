@@ -1,9 +1,29 @@
 <script setup lang="ts">
-import type { User } from "~/types/db";
+import type { Conversation, User } from "~/types/db";
 
 const props = defineProps<{ user: User }>();
-const handleClick = () => {
-  pr(props.user, "user");
+const { setLoading, setAppError, showToast } = useStore();
+const handleClick = async () => {
+  try {
+    setLoading(true);
+    const conversation = await $fetch<Conversation>("/api/conversations", {
+      method: "POST",
+      body: { userId: props.user.id },
+    });
+    if (!conversation) {
+      setAppError({
+        message: "Unkwon error occured",
+        statusMessage: "Unkwon error ouccured",
+      });
+    } else {
+      pr(conversation, "conversation");
+    }
+  } catch (error) {
+    setAppError(handleApiError(error));
+  } finally {
+    setLoading(false);
+    setAppError(null);
+  }
 };
 </script>
 <template>
