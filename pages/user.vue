@@ -5,9 +5,7 @@ definePageMeta({
 });
 </script>
 <template>
-  <div
-    class="w-full bg-gray-100 px-4 py-10 sm:px-6 lg:px-8 lg:py-6 dark:bg-gray-900"
-  >
-    <ChatEmpty label="Select A chat or Start a new conversation" />
+  <div class="w-full">
+    <ChatEmpty label="Choose an existing chat or start a new conversation." />
   </div>
 </template>

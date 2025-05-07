@@ -1,7 +1,5 @@
 <template>
-  <div class="overflow-y-auto">
-    <pre>{{ conversations }}</pre>
-  </div>
+  <div class=""></div>
 </template>
 
 <script setup lang="ts">
