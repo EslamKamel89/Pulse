@@ -13,4 +13,4 @@ export type NavRoute = {
   onClick: (() => void) | null;
 };
 
-export type UseFetchKey = "users";
+export type UseFetchKey = "users" | "conversations";
