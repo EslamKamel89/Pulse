@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div class="h-full w-full">
+    <ConversationsList />
+  </div>
 </template>
 
 <script setup lang="ts">
