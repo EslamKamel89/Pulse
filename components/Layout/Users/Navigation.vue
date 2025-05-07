@@ -18,7 +18,7 @@ onMounted(() => {
 </script>
 <template>
   <div
-    class="b flex min-h-full w-min flex-col self-stretch bg-gray-100 dark:bg-gray-900"
+    class="flex min-h-full w-min flex-col self-stretch bg-gray-100 dark:bg-gray-900"
   >
     <UDrawer direction="left">
       <div class="block w-fit lg:hidden">
