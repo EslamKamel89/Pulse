@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from "@nuxt/ui";
-import type { User } from "~/types/db";
+import type { Conversation, User } from "~/types/db";
 
 const open = ref(false);
 const { setLoading, setAppError, showToast } = useStore();
@@ -24,6 +24,21 @@ const state = reactive<Partial<GroupChatModelSchemaType>>({
 async function onSubmit(event: FormSubmitEvent<GroupChatModelSchemaType>) {
   setLoading(true);
   try {
+    const conversation = await $fetch<Conversation>("/api/conversations", {
+      method: "POST",
+      body: {
+        isGroup: true,
+        members: event.data.selectedUsers,
+        name: event.data.name,
+      },
+    });
+    if (conversation) {
+    } else {
+      setAppError({
+        message: "Unknown error occured",
+        statusMessage: "Unknown error occured",
+      });
+    }
   } catch (error) {
     setAppError(handleApiError(error));
   } finally {
@@ -55,7 +70,7 @@ const closeModal = () => {
           :schema="groupChatModelSchema"
           :state="state"
           class="w-full space-y-4"
-          @submit="onSubmit"
+          @submit.prevent="onSubmit"
         >
           <div class="flex w-full flex-col md:flex-row md:space-x-5">
             <UFormField label="Group Name" name="name" class="w-full">
