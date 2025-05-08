@@ -18,17 +18,19 @@ defineProps<{
       <div class="flex flex-col">
         <div class="flex justify-between py-4 text-neutral-800 dark:text-white">
           <div class="text-2xl font-bold">Messages</div>
-          <UButton
-            icon="i-lucide-user-plus"
-            color="neutral"
-            variant="soft"
-            class="rounded-full"
-            size="sm"
-            :ui="{
-              leadingIcon: 'text-primary',
-            }"
-          >
-          </UButton>
+          <LayoutConversationsGroupChatModel :users="[]">
+            <UButton
+              icon="i-lucide-user-plus"
+              color="neutral"
+              variant="soft"
+              class="rounded-full"
+              size="sm"
+              :ui="{
+                leadingIcon: 'text-primary',
+              }"
+            >
+            </UButton>
+          </LayoutConversationsGroupChatModel>
         </div>
         <LayoutUsersListLoading v-if="pending" />
         <template v-else>

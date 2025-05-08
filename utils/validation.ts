@@ -33,3 +33,14 @@ export const registerSchema = z
     path: ["confirm"],
   });
 export type RegisterSchemaType = z.infer<typeof registerSchema>;
+
+export const groupChatModelSchema = z.object({
+  name: z.string().min(1, min("Group Name", 1)),
+  selectedUsers: z.array(
+    z.object({
+      value: z.number(),
+      label: z.string().nullable(),
+    }),
+  ),
+});
+export type GroupChatModelSchemaType = z.infer<typeof groupChatModelSchema>;
