@@ -1,11 +1,25 @@
 <script setup lang="ts">
-import type { Conversation } from "~/types/db";
+import type { UseFetchKey } from "~/types";
+import type { Conversation, User } from "~/types/db";
 
 defineProps<{
   conversations: Conversation[];
   pending: boolean;
   isDesktop: boolean;
 }>();
+const {
+  data: users,
+  status,
+  execute,
+} = await useFetch<User[]>("/api/users", {
+  lazy: true,
+  immediate: false,
+  server: false,
+  key: "users" as UseFetchKey,
+});
+onMounted(() => {
+  execute();
+});
 </script>
 <template>
   <div
@@ -18,7 +32,7 @@ defineProps<{
       <div class="flex flex-col">
         <div class="flex justify-between py-4 text-neutral-800 dark:text-white">
           <div class="text-2xl font-bold">Messages</div>
-          <LayoutConversationsGroupChatModel :users="[]">
+          <LayoutConversationsGroupChatModel :users="users ?? []">
             <UButton
               icon="i-lucide-user-plus"
               color="neutral"
