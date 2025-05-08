@@ -1,8 +1,17 @@
 <script setup lang="ts">
 import type { Conversation } from "~/types/db";
 
-const props = defineProps<{ conversation: Conversation }>();
+const props = defineProps<{
+  conversation: Conversation;
+  selected?: boolean;
+}>();
 const { setLoading, setAppError, showToast } = useStore();
+const { user: existingUser } = await useUserSession();
+const otherUser = computed(() => {
+  return props.conversation.users?.find(
+    (user) => user.id != existingUser.value?.id,
+  );
+});
 const handleClick = async () => {
   //   try {
   //     setLoading(true);
@@ -31,19 +40,16 @@ const handleClick = async () => {
     <div
       class="flex h-8 w-8 items-center justify-center rounded-full shadow-md"
     >
-      <div class="">Single Conversation</div>
-      <!--
-        <SharedAvatar :user="user" />
-    --></div>
-    <!--
+      <SharedAvatar :user="otherUser ?? null" />
+    </div>
+
     <div class="grid gap-1">
       <div class="h-4 w-[150px] overflow-clip text-xs">
-        {{ user.email }}
+        {{ otherUser?.email }}
       </div>
       <div class="h-4 w-[100px] overflow-clip text-xs font-semibold">
-        {{ user.name }}
+        {{ otherUser?.name }}
       </div>
     </div>
--->
   </div>
 </template>

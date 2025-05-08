@@ -17,7 +17,7 @@ defineProps<{
     >
       <div class="flex flex-col">
         <div class="py-4 text-2xl font-bold text-neutral-800 dark:text-white">
-          Conversations
+          Messages
         </div>
         <LayoutUsersListLoading v-if="pending" />
         <template v-else>

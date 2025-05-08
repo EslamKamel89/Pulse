@@ -15,6 +15,9 @@ const {
 onMounted(() => {
   execute();
 });
+watchEffect(() => {
+  if (!conversations.value) conversations.value = [];
+});
 </script>
 <template>
   <div
