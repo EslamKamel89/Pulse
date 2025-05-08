@@ -1,5 +1,6 @@
 import {
   Conversation as ConversationType,
+  Message as MessageType,
   OauthAccount as OauthAccountType,
   User as UserType,
 } from "@prisma/client";

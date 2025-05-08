@@ -16,18 +16,32 @@ defineProps<{
       class="flex flex-1 flex-col justify-between overflow-y-auto border-r-[1px] bg-white px-4 pb-4 dark:border-gray-700 dark:bg-gray-900"
     >
       <div class="flex flex-col">
-        <div class="py-4 text-2xl font-bold text-neutral-800 dark:text-white">
-          Messages
+        <div class="flex justify-between py-4 text-neutral-800 dark:text-white">
+          <div class="text-2xl font-bold">Messages</div>
+          <UButton
+            icon="i-lucide-user-plus"
+            color="neutral"
+            variant="soft"
+            class="rounded-full"
+            size="sm"
+            :ui="{
+              leadingIcon: 'text-primary',
+            }"
+          >
+          </UButton>
         </div>
         <LayoutUsersListLoading v-if="pending" />
         <template v-else>
           <div class="space-y-4">
             <div
-              class="flex items-center gap-4 rounded-lg px-1 py-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+              class="w-full"
               v-for="conversation in conversations"
               :key="conversation.id"
             >
-              <LayoutConversationsItem :conversation="conversation" />
+              <LayoutConversationsItem
+                :conversation="conversation"
+                :selected="false"
+              />
             </div>
           </div>
         </template>
