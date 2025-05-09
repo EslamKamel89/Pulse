@@ -25,13 +25,8 @@ useHead({
   <div class="flex h-full flex-col pb-12 lg:pb-4">
     <div class="flex flex-1 flex-col">
       <ConversationHeader v-if="conversation" :conversation="conversation" />
-      <div class="flex-1">
-        <pre v-if="conversation?.messages">
-          {{
-            conversation?.messages[conversation.messages?.length - 1] ??
-            "Empty"
-          }}
-        </pre>
+      <div class="flex-1 overflow-y-auto">
+        <ConversationList :messages="conversation?.messages ?? []" />
       </div>
       <ConversationForm />
     </div>
