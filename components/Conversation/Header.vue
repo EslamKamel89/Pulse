@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Ellipsis } from "lucide-vue-next";
 import type { Conversation } from "~/types/db";
 
 const props = defineProps<{
@@ -43,6 +44,15 @@ const statusText = computed(() => {
           {{ statusText }}
         </div>
       </div>
+    </div>
+    <div>
+      <UDrawer direction="right">
+        <Ellipsis />
+
+        <template #content>
+          <Placeholder class="m-4 size-full min-h-96 min-w-96" />
+        </template>
+      </UDrawer>
     </div>
   </div>
 </template>
