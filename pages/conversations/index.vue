@@ -1,6 +1,6 @@
 <template>
   <div class="h-full w-full">
-    <ConversationsList />
+    <ConversationsCreateOrSelect />
   </div>
 </template>
 

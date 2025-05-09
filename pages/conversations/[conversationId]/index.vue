@@ -22,5 +22,7 @@ useHead({
 });
 </script>
 <template>
-  <div>{{ conversation }}</div>
+  <div>
+    <ConversationHeader v-if="conversation" :conversation="conversation" />
+  </div>
 </template>
