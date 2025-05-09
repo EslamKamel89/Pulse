@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Ellipsis, X } from "lucide-vue-next";
 import { ref } from "vue";
+import type { UseFetchKey } from "~/types";
 import type { Conversation, User } from "~/types/db";
 import Avatar from "../Shared/Avatar.vue";
 
@@ -28,12 +29,37 @@ const { open, confirm } = useConfirm({
   title: "Are You Sure You Want To Delete The Conversation?!!",
   description: "Warning the is action is premenant!!",
 });
+const { setAppError, showToast, setLoading } = useStore();
 const handleDelete = async () => {
   await open();
   if (confirm.value) {
-    pr("the user pressed yes");
-  } else {
-    pr("the user pressed no");
+    try {
+      setLoading(true);
+      const conversation = await $fetch<Conversation>(
+        `/api/conversations/${props.conversation.id}`,
+        {
+          method: "DELETE",
+        },
+      );
+      if (conversation) {
+        refreshNuxtData("conversations" as UseFetchKey);
+        showToast({
+          message: "Conversation deleted successfully",
+          type: "success",
+        });
+        await navigateTo("/conversations");
+      } else {
+        setAppError({
+          message: "Unkwon Error Occured",
+          statusMessage: "Unkwon Error Occured",
+        });
+      }
+    } catch (error) {
+      setAppError(handleApiError(error));
+    } finally {
+      setAppError(null);
+      setLoading(false);
+    }
   }
 };
 </script>
