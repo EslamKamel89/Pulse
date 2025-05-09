@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { SendHorizontal } from "lucide-vue-next";
-
+const { state } = useStore();
+const { isLoading } = toRefs(state.value);
 const { handleSendMessage, message, image, handleImageDelete } =
   useCreateMessage();
 </script>
@@ -34,7 +35,7 @@ const { handleSendMessage, message, image, handleImageDelete } =
         <!-- Send Button -->
         <button
           type="submit"
-          :disabled="!message?.trim()"
+          :disabled="!message?.trim() || isLoading"
           class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 p-2 text-white shadow-md transition-all duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:opacity-50 disabled:hover:bg-blue-600 dark:bg-blue-500 dark:hover:bg-blue-600"
           aria-label="Send message"
         >
