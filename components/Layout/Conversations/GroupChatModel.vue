@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from "@nuxt/ui";
+import type { UseFetchKey } from "~/types";
 import type { Conversation, User } from "~/types/db";
 
 const open = ref(false);
@@ -33,6 +34,12 @@ async function onSubmit(event: FormSubmitEvent<GroupChatModelSchemaType>) {
       },
     });
     if (conversation) {
+      refreshNuxtData("conversations" as UseFetchKey);
+      showToast({
+        message: "New Group Chat Created",
+        type: "success",
+      });
+      open.value = false;
     } else {
       setAppError({
         message: "Unknown error occured",
