@@ -24,26 +24,7 @@ const lastMessageText = computed(() => {
   return lastMessage.value?.body ?? "Started a conversation";
 });
 const handleClick = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const conversation = await $fetch<Conversation>("/api/conversations", {
-  //       method: "POST",
-  //       body: { userId: props.user.id },
-  //     });
-  //     if (!conversation) {
-  //       setAppError({
-  //         message: "Unkwon error occured",
-  //         statusMessage: "Unkwon error ouccured",
-  //       });
-  //     } else {
-  //       pr(conversation, "conversation");
-  //     }
-  //   } catch (error) {
-  //     setAppError(handleApiError(error));
-  //   } finally {
-  //     setLoading(false);
-  //     setAppError(null);
-  //   }
+  await navigateTo(`/conversations/${props.conversation.id}`);
 };
 </script>
 <template>

@@ -21,7 +21,7 @@ export const useRoutes = () => {
       },
       {
         label: "Users",
-        href: "/users",
+        href: "/user",
         icon: "heroicons:users-20-solid",
         active: params.name === "users",
         onClick: null,
