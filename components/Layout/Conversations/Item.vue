@@ -18,7 +18,7 @@ const otherUser = computed(() => {
 });
 
 const lastMessage = computed(() => {
-  const messages = props.conversation.messaages; // Note: typo in prop name? Should be `messages`?
+  const messages = props.conversation.messages; // Note: typo in prop name? Should be `messages`?
   if (!messages || messages.length === 0) return null;
   return messages[messages.length - 1];
 });
@@ -59,6 +59,7 @@ const handleClick = async () => {
               : otherUser?.name
           }}
         </h3>
+
         <span
           v-if="conversation.lastMessageAt"
           class="ml-2 flex-shrink-0 text-xs font-medium text-gray-500 dark:text-gray-400"

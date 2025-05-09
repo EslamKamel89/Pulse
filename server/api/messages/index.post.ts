@@ -24,5 +24,6 @@ export default defineEventHandler(async (event) => {
     data: { lastMessageAt: new Date() },
     include: { users: true, messages: true },
   });
-  return newConversation;
+  // todo:pusher stuff
+  return newMessage;
 });

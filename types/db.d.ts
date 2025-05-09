@@ -12,7 +12,7 @@ export type User = Omit<UserType, "hashedPassword"> & {
 export type OauthAccount = OauthAccountType & { user?: UserType };
 export type Conversation = ConversationType & {
   users?: User[];
-  messaages?: Message[];
+  messages?: Message[];
 };
 export type Message = MessageType & {
   sender?: User;
