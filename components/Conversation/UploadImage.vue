@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { useCreateMessage } from "~/composables/useCreateMessage";
+
+const { open, user, handleImageSelect, closeModal, image } = useCreateMessage();
+</script>
 <template>
   <UModal
     v-model:open="open"
@@ -23,7 +28,7 @@
         </div>
         <SharedImageUpload
           title="Upload"
-          @file-selected="handleFileSelect"
+          @file-selected="handleImageSelect"
           class=""
         />
         <div class="flex space-x-2">
@@ -33,9 +38,3 @@
     </template>
   </UModal>
 </template>
-
-<script setup lang="ts">
-import { useCreateMessage } from "~/composables/useCreateMessage";
-
-const { open, user, handleFileSelect, closeModal } = useCreateMessage();
-</script>
