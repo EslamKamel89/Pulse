@@ -1,3 +1,43 @@
+<script setup lang="ts">
+import { Ellipsis, X } from "lucide-vue-next";
+import { ref } from "vue";
+import type { Conversation, User } from "~/types/db";
+import Avatar from "../Shared/Avatar.vue";
+
+const props = defineProps<{
+  title: string;
+  conversation: Conversation;
+  user: User | null;
+  otherUsers: User[];
+  isActive: boolean;
+  statusText: string;
+}>();
+
+const isOpen = ref(false);
+
+// Helper function for date formatting
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+const { open, confirm } = useConfirm({
+  title: "Are You Sure You Want To Delete The Conversation?!!",
+  description: "Warning the is action is premenant!!",
+});
+const handleDelete = async () => {
+  await open();
+  if (confirm.value) {
+    pr("the user pressed yes");
+  } else {
+    pr("the user pressed no");
+  }
+};
+</script>
+
 <template>
   <UDrawer direction="right" v-model:open="isOpen">
     <!-- Trigger Button -->
@@ -50,6 +90,7 @@
             >
               <div
                 class="flex h-12 w-12 items-center justify-center rounded-full bg-red-100 transition-colors duration-300 group-hover:bg-red-200 dark:bg-red-900/30 dark:group-hover:bg-red-800/40"
+                @click="handleDelete"
               >
                 <Icon
                   name="ion:trash"
@@ -132,30 +173,3 @@
     </template>
   </UDrawer>
 </template>
-
-<script setup lang="ts">
-import { Ellipsis, X } from "lucide-vue-next";
-import { ref } from "vue";
-import type { Conversation, User } from "~/types/db";
-
-const props = defineProps<{
-  title: string;
-  conversation: Conversation;
-  user: User | null;
-  otherUsers: User[];
-  isActive: boolean;
-  statusText: string;
-}>();
-
-const isOpen = ref(false);
-
-// Helper function for date formatting
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-};
-</script>
