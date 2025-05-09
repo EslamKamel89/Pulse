@@ -29,6 +29,7 @@ useHead({
         <ConversationList :messages="conversation?.messages ?? []" />
       </div>
       <ConversationForm />
+      <div class="h-20 lg:h-0"></div>
     </div>
   </div>
 </template>
