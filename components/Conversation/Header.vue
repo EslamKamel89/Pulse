@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { Conversation } from "~/types/db";
+import type { Conversation, User } from "~/types/db";
 
 const props = defineProps<{
   conversation: Conversation;
 }>();
-const { user } = useUserSession();
+const user = ref(useUserSession().user.value as User);
 const otherUsers = computed(() => {
   return props.conversation.users?.filter((u) => u.id != user.value?.id) ?? [];
 });
@@ -17,6 +17,13 @@ const statusText = computed(() => {
     return length ? `${length} members` : "";
   }
   return isActive.value ? "onLine" : "offLine";
+});
+const title = computed(() => {
+  return (
+    (props.conversation.isGroup && props.conversation.name
+      ? props.conversation.name
+      : otherUsers.value[0].name) ?? ""
+  );
 });
 </script>
 <template>
@@ -33,11 +40,7 @@ const statusText = computed(() => {
       <SharedAvatar :user="otherUsers[0]" />
       <div class="flex flex-col">
         <div>
-          {{
-            conversation.isGroup && conversation.name
-              ? conversation.name
-              : otherUsers[0].name
-          }}
+          {{ title }}
         </div>
         <div class="text-sm font-light text-neutral-500">
           {{ statusText }}
@@ -45,7 +48,14 @@ const statusText = computed(() => {
       </div>
     </div>
     <div>
-      <ConversationInfo :conversation />
+      <ConversationInfo
+        :title
+        :conversation
+        :user
+        :other-users
+        :is-active
+        :status-text
+      />
     </div>
   </div>
 </template>

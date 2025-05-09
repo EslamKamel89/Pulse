@@ -23,7 +23,7 @@ onMounted(() => {
 </script>
 <template>
   <div
-    class="flex h-full min-h-full max-w-60 flex-1 flex-col lg:flex"
+    class="flex h-full min-h-full flex-1 flex-col lg:flex"
     :class="{ hidden: isDesktop }"
   >
     <div
