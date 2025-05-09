@@ -26,6 +26,14 @@ const isCurrentUser = computed(
           'rounded-e-xl rounded-se-xl': !isCurrentUser,
         }"
       >
+        <div>
+          <img
+            v-if="message.image"
+            :src="`${message.image}`"
+            alt="not found"
+            class="h-32 rounded-lg"
+          />
+        </div>
         <div class="flex items-center space-x-2 rtl:space-x-reverse">
           <span class="text-sm font-semibold text-gray-900 dark:text-white">{{
             message.sender?.name
