@@ -7,7 +7,11 @@ const conversation = computed(() =>
     (conversation) => conversation.id == conversationId.value,
   ),
 );
-//! seo and head
+const { setConversationId } = useStore();
+onMounted(() => {
+  setConversationId(conversationId.value);
+});
+
 definePageMeta({
   middleware: ["auth"],
   layout: "conversations",

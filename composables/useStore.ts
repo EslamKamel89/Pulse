@@ -2,6 +2,7 @@ import type { ApiError } from "~/types/index.d.ts";
 interface State {
   apiError: ApiError | null;
   isLoading: boolean;
+  conversationId?: number;
 }
 const initialState: State = {
   apiError: null,
@@ -21,6 +22,9 @@ export const useStore = () => {
   };
   const setLoading = (loading: boolean) => {
     state.value.isLoading = loading;
+  };
+  const setConversationId = (id: number) => {
+    state.value.conversationId = id;
   };
   const resetState = () => {
     state.value = initialState;
@@ -45,5 +49,6 @@ export const useStore = () => {
     setLoading,
     resetState,
     showToast,
+    setConversationId,
   };
 };

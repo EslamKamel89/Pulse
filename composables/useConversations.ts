@@ -1,5 +1,5 @@
 import type { UseFetchKey } from "~/types";
-import type { Conversation } from "~/types/db";
+import type { Conversation, Message } from "~/types/db";
 const conversations = ref<Conversation[]>();
 const conversationsStatus = ref<"error" | "idle" | "pending" | "success">();
 // const status
@@ -18,10 +18,15 @@ const fetchData = async () => {
   conversationsStatus.value = status.value;
 };
 export const useConversations = () => {
+  const { conversationId } = toRefs(useStore().state.value);
+  const { $pusher } = useNuxtApp();
   onMounted(() => {
-    pr("useConversations is called");
+    pr("useConversations composable onMounted hook is called");
     fetchData();
-    // execute();
+    $pusher.subscribe(`conversation.${conversationId?.value}`);
+    $pusher.bind("message:new", (message: Message[]) => {
+      // conversation
+    });
   });
   return {
     conversations,

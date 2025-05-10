@@ -19,6 +19,7 @@ export default defineEventHandler(async (event) => {
         connect: { id: conversationId },
       },
     },
+    include: { conversation: true, sender: true },
   });
   const updatedConversation = await db.conversation.update({
     where: { id: conversationId },
