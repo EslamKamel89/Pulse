@@ -1,23 +1,5 @@
 <script setup lang="ts">
-import type { UseFetchKey } from "~/types";
-import type { Conversation } from "~/types/db";
-
-const {
-  data: conversations,
-  status,
-  execute,
-} = await useFetch<Conversation[]>("/api/conversations", {
-  lazy: true,
-  server: false,
-  immediate: false,
-  key: "conversations" as UseFetchKey,
-});
-onMounted(() => {
-  execute();
-});
-// watchEffect(() => {
-//   if (!conversations.value) conversations.value = [];
-// });
+const { conversations, conversationsStatus } = useConversations();
 </script>
 <template>
   <div
@@ -36,14 +18,14 @@ onMounted(() => {
       <template #content>
         <LayoutConversationsList
           :conversations="conversations ?? []"
-          :pending="status == 'pending'"
+          :pending="conversationsStatus == 'pending'"
           :is-desktop="false"
         />
       </template>
     </UDrawer>
     <LayoutConversationsList
       :conversations="conversations ?? []"
-      :pending="status == 'pending'"
+      :pending="conversationsStatus == 'pending'"
       :is-desktop="true"
     />
   </div>
