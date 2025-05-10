@@ -1,3 +1,4 @@
+import { pusherServer } from "~/server/utils/pusher";
 import db from "~/utils/db";
 
 export default defineEventHandler(async (event) => {
@@ -19,11 +20,25 @@ export default defineEventHandler(async (event) => {
       },
     },
   });
-  const newConversation = await db.conversation.update({
+  const updatedConversation = await db.conversation.update({
     where: { id: conversationId },
     data: { lastMessageAt: new Date() },
     include: { users: true, messages: true },
   });
-  // todo:pusher stuff
+  await pusherServer.trigger(
+    `conversation.${conversationId}`,
+    "message:new",
+    newMessage,
+  );
+  const lastMessage =
+    updatedConversation.messages[updatedConversation.messages.length - 1];
+  updatedConversation.users.map((user) => {
+    if (user.id) {
+      pusherServer.trigger(`user.${user.id}`, "conversation:update", {
+        id: conversationId,
+        message: [lastMessage],
+      });
+    }
+  });
   return newMessage;
 });
