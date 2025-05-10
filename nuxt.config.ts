@@ -21,8 +21,8 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      pusherAppKey: process.env.PUSHER_APP_KEY,
-      pusherCluster: process.env.PUSHER_CLUSTER,
+      pusherAppKey: process.env.NUXT_PUBLIC_PUSHER_APP_KEY,
+      pusherCluster: process.env.NUXT_PUBLIC_PUSHER_CLUSTER,
     },
     pusherAppId: process.env.PUSHER_APP_ID,
     pusherSecret: process.env.PUSHER_SECRET,

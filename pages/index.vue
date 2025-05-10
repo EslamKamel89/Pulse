@@ -13,6 +13,11 @@ watch(
   },
   { immediate: true },
 );
+const { $pusher } = useNuxtApp();
+var channel = $pusher.subscribe("my-channel");
+channel.bind("my-event", function (data: any) {
+  // app.messages.push(JSON.stringify(data));
+});
 </script>
 <template>
   <div class="block text-xl text-red-500">home page</div>
