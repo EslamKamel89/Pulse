@@ -20,7 +20,12 @@ export default defineNuxtConfig({
     "@prisma/nuxt",
   ],
   runtimeConfig: {
-    public: {},
+    public: {
+      pusherAppKey: process.env.PUSHER_APP_KEY,
+      pusherCluster: process.env.PUSHER_CLUSTER,
+    },
+    pusherAppId: process.env.PUSHER_APP_ID,
+    pusherSecret: process.env.PUSHER_SECRET,
     githubClientId: process.env.GITHUB_CLIENT_ID,
     githubClientSecret: process.env.GITHUB_CLIENT_SECRET,
     oauth: {
